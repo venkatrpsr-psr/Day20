@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Office Location</title>
+</head>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url(../Day20/shutterstock_1771088840.jpg) center/cover no-repeat;
+      
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 40px;
+      width: 340px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card :hover {
+       transform: scale(1.1);
+    }
+
+    .card h1 {
+      color: #fff;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #393737;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .map-btn {
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(135deg, #0945dc, #76a3e7);
+      color: #3e3c3c;
+      font-size: 16px;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(255, 75, 43, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .map-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 15px 35px rgba(2, 13, 58, 0.6);
+    }
+
+    
+  </style>
+<body>
+  
+  <div class="card">
+    <h1>📍 Open Location</h1>
+    <p>
+      Click below to view the location on Google Maps.
+    </p>
+    <button class="map-btn" onclick="openMap()">
+      Open in Google Maps
+    </button>
+  </div>
+
+  
+  <script>
+    function openMap() {
+      const address =
+        "F8XP+64X, PJR Colony, ICRISAT Colony, Miyapur, Hyderabad, Telangana 500050";
+      const mapURL =
+        "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address);
+      window.open(mapURL, "_blank");
+    }
+  </script>
+
+</body>
+</html>

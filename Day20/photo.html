@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Album Viewer</title>
+</head>    
+
+<style>
+
+:root {
+ 
+  --font-main: Arial, Helvetica, sans-serif;
+
+  --text-dark: #222;
+  --text-heading: #01101b;
+  --text-light: #666;
+  --card-bg: #e6ddbe;
+
+  --body-bg: url(../Day20/photo.png);
+
+  --container-width: 1100px;
+  --card-width: 220px;
+  --preview-img-size: 200px;
+
+  --space-small: 15px;
+  --space-medium: 20px;
+  --space-large: 40px;
+
+  --radius-small: 10px;
+
+  --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: 0 15px 35px rgba(2, 13, 58, 0.6);
+  --img-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+  --transition-fast: 0.3s ease;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-main);
+}
+
+body {
+  padding: var(--space-medium);
+  background: var(--body-bg) center/cover no-repeat;
+  text-align: center;
+  position: relative;
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: var(--space-large) auto;
+  padding: var(--space-medium);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text-dark);
+}
+
+.cards {
+  display: flex;
+  gap: var(--space-medium);
+  justify-content: center;
+  margin-bottom: var(--space-large);
+  flex-wrap: wrap;
+}
+
+.card {
+  background: var(--card-bg);
+  width: var(--card-width);
+  padding: var(--space-medium);
+  border-radius: var(--radius-small);
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  color: var(--text-heading);
+}
+
+.card p {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-small);
+  margin-top: 30px;
+}
+
+.preview img {
+  width: var(--preview-img-size);
+  height: var(--preview-img-size);
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: var(--radius-small);
+  box-shadow: var(--img-shadow);
+  transition: transform var(--transition-fast);
+}
+
+.preview img:hover {
+  transform: scale(1.05);
+}
+
+.preview p {
+  text-align: center;
+  font-size: 16px;
+}
+
+</style>
+
+<body>
+
+
+<div class="container">
+    <h1> Photo Album Viewer</h1>
+
+    <div class="cards">
+        <div class="card" onclick="openPhoto(1)">
+            <h2>Album 1</h2>
+            <p>Click to view album 1 photos</p>
+        </div>
+        <div class="card" onclick="openPhoto(2)">
+            <h2>Album 2</h2>
+            <p>Click to view album 2 photos</p>
+        </div>
+        <div class="card" onclick="openPhoto(3)">
+            <h2>Album 3</h2>
+            <p>Click to view album 3 photos</p>
+        </div>
+    </div>
+
+    <div class="preview" id="preview">
+    </div>    
+
+</div>
+
+<script>
+    const previewDiv = document.getElementById('preview');
+
+    function openPhoto(albumId) {
+        previewDiv.innerHTML = ''; 
+
+        fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}&_limit=10`)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(photo => {
+                    const img = document.createElement('img');
+                    img.src = `https://picsum.photos/300/200?random=${photo.id}`;
+                    img.alt = photo.title;
+                    previewDiv.appendChild(img);});
+            });
+            
+    }
+</script>
+
+</body>
+</html>
